@@ -1,10 +1,13 @@
-/* Declare and Define the functions here that will make the function calls below work properly */
+/* Declare and Define the functions here that will make the function calls below
+//work properly */
 
-
+var first = function(arr, cb){
+  cb(arr[0]);
+};
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 first(names, function(firstName){
-  console.log('The first name in names is ', firstName)
+  console.log('The first name in names is', firstName)
 });
 
 
@@ -12,12 +15,13 @@ first(names, function(firstName){
 
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
-
-
+var last = function(arr, cb){
+  cb(arr[arr.length - 1]);
+};
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 last(names, function(lastName){
-  console.log('The last name in names is ', lastName);
+  console.log('The last name in names is', lastName);
 });
 
 
@@ -25,8 +29,16 @@ last(names, function(lastName){
 
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
-//have the contains function return a boolean value for if the name is in the array or not.
+//have the contains function return a boolean value for if the name is in the
+//array or not.
 
+var contains = function(arr, str, cb) {
+  if (arr.indexOf(str) !== -1) {
+    cb(true);
+  } else {
+    cb(false);
+  }
+};
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 contains('Colt', names, function(yes){
@@ -42,26 +54,41 @@ contains('Colt', names, function(yes){
 
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
-
-
+var map = function(numArray, fn) {
+  for (var i = 0; i < numArray.length; i++) {
+    numArray[i] = fn(numArray[i]);
+  }
+};
 
 var numbers = [1,2,3,4,5];
-//Produces a new array of values by mapping each value in list through a transformation function
+//Produces a new array of values by mapping each value in list through a
+//transformation function
 map(numbers, function(num){
   return num * 2; //returns an array of [2,4,6,8,10]
 });
 
-
+console.log(numbers);
 
 
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
-
-
+var uniq = function(arr, cb) {
+  var obj = {};
+  var tempArray = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (!obj[arr[i]]) {
+      obj[arr[i]] = 1;
+    } else {
+      arr.splice(i, 1);
+    }
+  }
+  cb(arr);
+};
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 uniq(names, function(uniqArr){
-  console.log('The new names array with all the duplicate items removed is ', uniqArr);
+  console.log('The new names array with all the duplicate items removed is ',
+  uniqArr);
 });
 
 
@@ -69,8 +96,9 @@ uniq(names, function(uniqArr){
 
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
-
-
+var each = function(arr, cb) {
+  cb(arr[1], 1);
+};
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 each(names, function(item, indice){
@@ -82,8 +110,13 @@ each(names, function(item, indice){
 
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
-
-
+var getUserById = function(objArray, userId, cb) {
+  for (var i = 0; i < objArray.length; i++) {
+    if (userId === objArray[i].id) {
+      cb(objArray[i]);
+    }
+  }
+};
 
 var users = [
   {
@@ -106,19 +139,26 @@ var users = [
   },
 ];
 getUserById('16t', users, function(user){
-  console.log('The user with the id 16t has the email of ' + user.email + 'the name of ' + user.name + ' and the address of ' + user.address); 
+  console.log('The user with the id 16t has the email of ' + user.email +
+  'the name of ' + user.name + ' and the address of ' + user.address);
 });
-
 
 
 
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
+var find = function(numArray, fn) {
+  for (var i = 0; i < numArray.length; i++) {
+    if ( fn(numArray[i]) ) {
+      return numArray[i];
+    }
+  }
+};
 
 
-
-//Looks through each value in the list, returning the first one that passes a truth test 
+//Looks through each value in the list, returning the first one that passes a
+//truth test
 var numbers  = [1, 2, 3, 4, 5, 6];
-find(numbers, function(num){ 
+find(numbers, function(num){
   return num % 2 == 0; //should return 2
-})
+});
